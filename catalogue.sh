@@ -17,18 +17,18 @@ unzip /tmp/catalogue.zip &>>/tmp/roboshop.log
 
 echo -e "\e[3434mInstalling nodejs dependencies\e[0m"
 cd /app
-npm install
+npm install &>>/tmp/roboshop.log
 
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp catalogue.service /etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
 
 systemctl daemon-reload
 
 systemctl enable catalogue
-systemctl start catalogue
+systemctl start catalogue &>>/tmp/roboshop.log
 
 echo -e "\e[34minstall mongodb-client\e[0m"
-cp  mongodb.repo /etc/yum.repos.d/mongo.repo
-yum install mongodb-org-shell -y
+cp  mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
+yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
 echo -e "\e[34mLoad Schema\e[0m"
-mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js
+mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js &>>/tmp/roboshop.log
