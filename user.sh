@@ -20,7 +20,7 @@ echo -e "\e[31mInstalling nodejs dependencies\e[0m"
 cd /app
 npm install &>>/tmp/roboshop.log
 
-cp /home/centos/roboshop-shell/user.services /etc/systemd/system/user.service  &>>/tmp/roboshop.log
+cp /home/centos/roboshop-shell/user.service /etc/systemd/system/user.service  &>>/tmp/roboshop.log
 
 systemctl daemon-reload
 
@@ -32,4 +32,4 @@ cp  /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp
 yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
 echo -e "\e[34mLoad Schema\e[0m"
-mongo --host mongodb-dev.devopsd73.store </app/schema/catalogue.js &>>/tmp/roboshop.log
+mongo --host mongodb-dev.devopsd73.store </app/schema/user.js
