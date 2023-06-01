@@ -32,4 +32,4 @@ cp  /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp
 yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
 echo -e "\e[34mLoad Schema\e[0m"
-mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js &>>/tmp/roboshop.log
+mongo --host mongodb-dev.devopsd73.store </app/schema/catalogue.js &>>/tmp/roboshop.log
