@@ -8,6 +8,7 @@ echo -e "\e[31mAdding User\e[0m"
 useradd roboshop &>>/tmp/roboshop.log
 
 echo -e "\e[31mCreating a directory\e[0m"
+rm -rf /app
 mkdir /app &>>/tmp/roboshop.log
 
 echo -e "\e[31mDownload the application code to created app directory\e[0m"
@@ -19,7 +20,7 @@ echo -e "\e[31mInstalling nodejs dependencies\e[0m"
 cd /app
 npm install &>>/tmp/roboshop.log
 
-cp catalogue.service /etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
+cp catalogue.service /etc/systemd/system/catalogue.service  &>>/tmp/roboshop.log
 
 systemctl daemon-reload
 
