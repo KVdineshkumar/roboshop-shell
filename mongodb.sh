@@ -12,7 +12,7 @@ systemctl restart mongod &>>/tmp/roboshop.log
 
 # here we want Update listen address from 127.0.0.1 to 0.0.0.0 in /etc/mongod.conf
 echo -e "\e[34mUpdate listen address \e[0m"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /ect/mongodb.conf &>>/tmp/roboshop.log
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongodb.conf &>>/tmp/roboshop.log
 
 echo -e "\e[35mStart  MongoDB server \e[0m"
 systemctl restart mongod &>>/tmp/roboshop.log
