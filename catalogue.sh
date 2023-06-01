@@ -11,8 +11,8 @@ echo -e "\e[31mCreating a directory\e[0m"
 mkdir /app &>>/tmp/roboshop.log
 
 echo -e "\e[31mDownload the application code to created app directory\e[0m"
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/roboshop.log
-cd /app &>>/tmp/roboshop.log
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip  &>>/tmp/roboshop.log
+cd /app
 unzip /tmp/catalogue.zip &>>/tmp/roboshop.log
 
 echo -e "\e[31mInstalling nodejs dependencies\e[0m"
