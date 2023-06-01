@@ -24,7 +24,7 @@ cp /home/centos/roboshop-shell/user.service /etc/systemd/system/user.service  &>
 
 systemctl daemon-reload
 
-systemctl enable user
+systemctl enable user </app/schema/user.js
 systemctl start user &>>/tmp/roboshop.log
 
 echo -e "\e[31minstall mongodb-client\e[0m"
