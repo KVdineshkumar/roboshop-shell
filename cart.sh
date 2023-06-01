@@ -28,4 +28,4 @@ systemctl daemon-reload &>>/tem/roboshop.log
 
 echo -e "\e[31Strating cart\e[0m"
 systemctl enable cart &>>/tem/roboshop.log
-systemctl start cart &>>/tem/roboshop.log
+systemctl restart cart &>>/tem/roboshop.log
