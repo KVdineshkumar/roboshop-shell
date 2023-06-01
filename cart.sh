@@ -20,6 +20,10 @@ echo -e "\e[31mAdding dependencies for nodejs\e[0m"
 cd /app
 npm install &>>/tem/roboshop.log
 
+cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service &>>/tem/roboshop.log
+
+
+
 systemctl daemon-reload &>>/tem/roboshop.log
 
 echo -e "\e[31Strating cart\e[0m"
