@@ -1,7 +1,7 @@
 # To add the repo file in manual process we use VIM  but Automation we creating a file server-name.repo(mongodb.repo) and add the configuration
 # BY using CP we copying the configuration giving a file name as shown in below .
 echo -e "\e[33mCopy MongoDB repo \e[0m"
-cp mongodb.repo /etc/yum.repos.d/mongo.repo  &>>/tmp/roboshop.log
+cp /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo  &>>/tmp/roboshop.log
 
 echo -e "\e[33mInstalling MongoDB server \e[0m"
 yum install mongodb-org -y &>>/tmp/roboshop.log
