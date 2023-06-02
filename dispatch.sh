@@ -8,6 +8,11 @@ echo -e "\e[31mremoving and adding app directory\e[0m"
 rm -rf /app &>>/tmp/roboshop.log
 mkdir /app  &>>/tmp/roboshop.log
 
+echo -e "\e[31mDownload the application code to created app directory\e[0m"
+curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip &>>/tmp/roboshop.log
+cd /app &>>/tmp/roboshop.log
+unzip /tmp/dispatch.zip &>>/tmp/roboshop.log
+
 echo -e "\e[31mdependencies & build the software\e[0m"
 cd /app &>>/tmp/roboshop.log
 go mod init dispatch &>>/tmp/roboshop.log
