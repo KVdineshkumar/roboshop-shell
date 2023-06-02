@@ -1,6 +1,6 @@
 # CentOS-8 Comes with MySQL 8 Version by default, However our application needs MySQL 5.7. So lets disable MySQL 8 version.
 echo -e "\e[31mInstalling repo file\e[0m"
-cp mysql.repo /etc/yum.repos.d/mysql.repo &>>/tmp/roboshop.log
+cp /home/centos/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo &>>/tmp/roboshop.log
 
 echo -e "\e[32mInstalling MySQL server\e[0m"
 yum install mysql-community-server -y &>>/tmp/roboshop.log
