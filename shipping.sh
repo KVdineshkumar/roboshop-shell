@@ -22,7 +22,7 @@ echo -e "\e[31mSetup SystemD Shipping Service\e[0m"
 cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service &>>/tmp/roboshop.log
 
 echo -e "\e[31mStarting Shipping Service\e[0m"
-systemctl daemon-reload &>>/tmp/roboshop.log
+systemctl daemon-reload
 systemctl enable shipping &>>/tmp/roboshop.log
 systemctl start shipping &>>/tmp/roboshop.log
 
