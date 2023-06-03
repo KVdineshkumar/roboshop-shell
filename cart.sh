@@ -18,10 +18,10 @@ unzip /tmp/cart.zip &>>/tmp/roboshop.log
 
 echo -e "\e[31mAdding dependencies for nodejs\e[0m"
 cd /app
-npm install npm@latest -g &>>/tmp/roboshop.log
+npm install  &>>/tmp/roboshop.log
 
 echo -e "\e[31mSetup Systemd Service\e[0m"
-cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service &>>/tmp/roboshop.log
+cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service  &>>/tmp/roboshop.log
 
 echo -e "\e[31mStrating cart server\e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
