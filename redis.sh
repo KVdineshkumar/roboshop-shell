@@ -6,7 +6,7 @@ echo -e "\e[31mInstalling redis /e[0m"
 yum install redis -y &>>/tmp/roboshop.log
 
 echo -e "\e[31mUpdating listing Address /e[0m"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf   &>>/tmp/roboshop.log
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf -e 's/127.0.0.1/0.0.0.0/' vim /etc/redis/redis.conf  &>>/tmp/roboshop.log
 
 echo -e "\e[31mStarting Redis /e[0m"
 systemctl enable redis  &>>/tmp/roboshop.log
