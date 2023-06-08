@@ -1,4 +1,4 @@
-sorce common.sh
+source common.sh
 component=cart
 echo -e "${color}Executing repo file ${nocolor}"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>/tmp/roboshop.log
