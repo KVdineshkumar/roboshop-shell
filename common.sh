@@ -20,17 +20,33 @@ app_presetup () {
       rm -rf ${app_path}
       mkdir ${app_path} &>>${log_file}
        echo $?
+          if [ $? -eq 0 ]; then
+         echo sucess
+         else
+           echo failure
+         fi
 
     echo -e "${color}Download the application code to created app directory${nocolor}"
       curl  -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip  &>>${log_file}
        echo $?
+          if [ $? -eq 0 ]; then
+         echo sucess
+         else
+           echo failure
+         fi
 
     echo -e "${color}extracting application content${nocolor}"
 
       cd ${app_path}
       unzip /tmp/${component}.zip &>>${log_file}
        echo $?
+          if [ $? -eq 0 ]; then
+         echo sucess
+         else
+           echo failure
+         fi
        }
+
 
 systemd_setup() {
     cp /home/centos/roboshop-shell/payment.service /etc/systemd/system/payment.service &>>${log_file}
@@ -132,6 +148,11 @@ python() {
   echo -e "${color}Install Python 3.6${nocolor}"
   yum install python36 gcc python3-devel -y &>>${log_file}
   echo $?
+     if [ $? -eq 0 ]; then
+    echo sucess
+    else
+      echo failure
+    fi
 
 app_presetup
 
@@ -139,6 +160,11 @@ app_presetup
   cd /app &>>${log_file}
   pip3.6 install -r requirements.txt &>>${log_file}
    echo $?
+      if [ $? -eq 0 ]; then
+     echo sucess
+     else
+       echo failure
+     fi
 
  systemd_setup
  }
