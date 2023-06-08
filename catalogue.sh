@@ -1,3 +1,4 @@
+component=catalogue
 echo -e "\e[31mTHis is the script for repo\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/roboshop.log
 
@@ -12,24 +13,24 @@ rm -rf /app
 mkdir /app &>>/tmp/roboshop.log
 
 echo -e "\e[31mDownload the application code to created app directory\e[0m"
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip  &>>/tmp/roboshop.log
+curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip  &>>/tmp/roboshop.log
 cd /app
-unzip /tmp/catalogue.zip &>>/tmp/roboshop.log
+unzip /tmp/$component.zip &>>/tmp/roboshop.log
 
 echo -e "\e[31mInstalling nodejs dependencies\e[0m"
 cd /app
 npm install &>>/tmp/roboshop.log
 
-cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service  &>>/tmp/roboshop.log
+cp /home/centos/roboshop-shell/$component.service /etc/systemd/system/$component.service  &>>/tmp/roboshop.log
 
 systemctl daemon-reload
 
-systemctl enable catalogue
-systemctl start catalogue &>>/tmp/roboshop.log
+systemctl enable $component
+systemctl start $component &>>/tmp/roboshop.log
 
 echo -e "\e[31minstall mongodb-client\e[0m"
 cp  /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
 yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
 echo -e "\e[34mLoad Schema\e[0m"
-mongo --host mongodb-dev.devopsd73.store </app/schema/catalogue.js &>>/tmp/roboshop.log
+mongo --host mongodb-dev.devopsd73.store </app/schema/$component.js &>>/tmp/roboshop.log
