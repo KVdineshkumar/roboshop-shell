@@ -29,6 +29,7 @@ app_presetup () {
       cd ${app_path}
       unzip /tmp/${component}.zip &>>${log_file}
        echo $?
+       }
 
 systemd_setup() {
     cp /home/centos/roboshop-shell/payment.service /etc/systemd/system/payment.service &>>${log_file}
