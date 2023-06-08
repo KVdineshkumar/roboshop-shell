@@ -9,9 +9,10 @@ app_presetup () {
      if [ $? -eq 1 ]; then
     useradd roboshop &>>${log_file}
      fi
-      if [ $? -eq 1 ]; then
+      if [ $? -eq 0 ]; then
   echo sucess
-  else failure
+  else
+    echo failure
   fi
      echo $?
 
