@@ -81,6 +81,6 @@ maven() {
   echo -e "${color}Load Schema${nocolor}"
   mysql -h mysql-dev.devopsd73.store -uroot -pRoboShop@1 < /app/schema/${shipping}.sql &>>${log_file}
 
-  echo -e "${color}Restarting shipping${nocolor}"
+  echo -e "${color}Restarting shipping service${nocolor}"
   systemctl restart ${shipping} &>>${log_file}
 }
