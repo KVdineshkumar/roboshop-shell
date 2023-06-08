@@ -1,6 +1,6 @@
 source common.sh
 component=user
 
-noseJS
+nodeJS
 
 mongo_shema_setup
