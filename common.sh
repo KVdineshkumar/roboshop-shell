@@ -125,3 +125,4 @@ app_presetup
   pip3.6 install -r requirements.txt &>>${log_file}
 
  systemd_setup
+ }
