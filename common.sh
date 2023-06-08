@@ -3,7 +3,7 @@ nocolor="\e[0m"
 log_file="/tmp/roboshop.log"
 app_path="/app"
 
-stat-check() {
+stat_check() {
    if [ $? -eq 0 ]; then
            echo sucess
            else
@@ -142,7 +142,7 @@ python() {
   echo -e "${color}Install Python 3.6${nocolor}"
   yum install python36 gcc python3-devel -y &>>${log_file}
   echo $?
-   stat_check
+stat_check
 
 app_presetup
 
