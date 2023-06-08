@@ -38,7 +38,7 @@ nodeJS() {
 }
 
 mongo_shema_setup() {
-  echo -e "$colorinstall mongodb-client$nocolor"
+  echo -e "${color}install mongodb-client${nocolor}"
   cp  /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
   yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
