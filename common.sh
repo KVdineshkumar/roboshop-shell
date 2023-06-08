@@ -39,7 +39,7 @@ systemd_setup() {
     systemctl start payment &>>${log_file}
      echo $?
 }
-}
+
 
 mongo_shema_setup() {
   echo -e "${color}install mongodb-client${nocolor}"
