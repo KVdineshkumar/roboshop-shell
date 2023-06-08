@@ -6,18 +6,22 @@ app_path="/app"
 app_presetup () {
     echo -e "${color}Adding User\e[0m"
     useradd roboshop &>>${log_file}
+     echo $?
 
     echo -e "${color}Creating a directory${nocolor}"
       rm -rf ${app_path}
       mkdir ${app_path} &>>${log_file}
+       echo $?
 
     echo -e "${color}Download the application code to created app directory${nocolor}"
       curl  -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip  &>>${log_file}
+       echo $?
 
     echo -e "${color}extracting application content${nocolor}"
 
       cd ${app_path}
       unzip /tmp/${component}.zip &>>${log_file}
+       echo $?
 
 systemd_setup() {
     cp /home/centos/roboshop-shell/payment.service /etc/systemd/system/payment.service &>>${log_file}
@@ -26,6 +30,7 @@ systemd_setup() {
     systemctl daemon-reload &>>${log_file}
     systemctl enable payment &>>${log_file}
     systemctl start payment &>>${log_file}
+     echo $?
 }
 }
 
@@ -117,12 +122,14 @@ mysql_shema_setup
 python() {
   echo -e "${color}Install Python 3.6${nocolor}"
   yum install python36 gcc python3-devel -y &>>${log_file}
+  echo $?
 
 app_presetup
 
   echo -e "${color}Lets download the dependencies${nocolor}"
   cd /app &>>${log_file}
   pip3.6 install -r requirements.txt &>>${log_file}
+   echo $?
 
  systemd_setup
  }
