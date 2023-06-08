@@ -58,29 +58,29 @@ maven() {
   mkdir ${app_path}  &>>${log_file}
 
   echo -e "${color}Download the application code to created app directory${nocolor}"
-  curl -L -o /tmp/${shipping}.zip https://roboshop-artifacts.s3.amazonaws.com/${shipping}.zip &>>/tmp/roboshop.log
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>/tmp/roboshop.log
   cd ${app_path}
-  unzip /tmp/${shipping}.zip &>>${log_file}
+  unzip /tmp/${component}.zip &>>${log_file}
 
   echo -e "${color}download the dependencies & build the application${nocolor}"
   cd ${app_path}
   mvn clean package &>>/tmp/roboshop.log
-  mv target/${shipping}-1.0.jar ${shipping}.jar &>>${log_file}
+  mv target/${component}-1.0.jar ${component}.jar &>>${log_file}
 
   echo -e "${color}Setup SystemD Shipping Service${nocolor}"
-  cp /home/centos/roboshop-shell/${shipping}.service /etc/systemd/system/${shipping}.service &>>${log_file}
+  cp /home/centos/roboshop-shell/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
 
   echo -e "${color}Starting Shipping Service${nocolor}"
   systemctl daemon-reload
-  systemctl enable ${shipping} &>>${log_file}
-  systemctl start ${shipping} &>>${log_file}
+  systemctl enable ${component} &>>${log_file}
+  systemctl start ${component} &>>${log_file}
 
   echo -e "${color}Installing mysql server${nocolor}"
   yum install mysql -y &>>${log_file}
 
   echo -e "${color}Load Schema${nocolor}"
-  mysql -h mysql-dev.devopsd73.store -uroot -pRoboShop@1 < /app/schema/${shipping}.sql &>>${log_file}
+  mysql -h mysql-dev.devopsd73.store -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log_file}
 
   echo -e "${color}Restarting shipping service${nocolor}"
-  systemctl restart ${shipping} &>>${log_file}
+  systemctl restart ${component} &>>${log_file}
 }
