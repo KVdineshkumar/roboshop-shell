@@ -12,12 +12,38 @@ app_presetup () {
       mkdir ${app_path} &>>${log_file}
 
     echo -e "${color}Download the application code to created app directory${nocolor}"
-      curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip  &>>${log_file}
+      curl  -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip  &>>${log_file}
 
     echo -e "${color}extracting application content${nocolor}"
 
       cd ${app_path}
       unzip /tmp/${component}.zip &>>${log_file}
+
+systemd_setup() {
+    cp /home/centos/roboshop-shell/payment.service /etc/systemd/system/payment.service &>>${log_file}
+
+    echo -e "${color}Setup Starting  Payment Service${nocolor}"
+    systemctl daemon-reload &>>${log_file}
+    systemctl enable payment &>>${log_file}
+    systemctl start payment &>>${log_file}
+}
+}
+
+mongo_shema_setup() {
+  echo -e "${color}install mongodb-client${nocolor}"
+  cp  /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
+  yum install mongodb-org-shell -y &>>/tmp/roboshop.log
+
+  echo -e "\e[34mLoad Schema\e[0m"
+  mongo --host mongodb-dev.devopsd73.store </app/schema/${component}.js &>>/tmp/roboshop.log
+}
+mysql_shema_setup() {
+
+  echo -e "${color}Installing mysql server${nocolor}"
+  yum install mysql -y &>>${log_file}
+
+  echo -e "${color}Load Schema${nocolor}"
+  mysql -h mysql-dev.devopsd73.store -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log_file}
 }
 
 nodeJS() {
@@ -53,22 +79,6 @@ nodeJS() {
 
 }
 
-mongo_shema_setup() {
-  echo -e "${color}install mongodb-client${nocolor}"
-  cp  /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
-  yum install mongodb-org-shell -y &>>/tmp/roboshop.log
-
-  echo -e "\e[34mLoad Schema\e[0m"
-  mongo --host mongodb-dev.devopsd73.store </app/schema/${component}.js &>>/tmp/roboshop.log
-}
-mysql_shema_setup() {
-
-  echo -e "${color}Installing mysql server${nocolor}"
-  yum install mysql -y &>>${log_file}
-
-  echo -e "${color}Load Schema${nocolor}"
-  mysql -h mysql-dev.devopsd73.store -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log_file}
-}
 
 maven() {
   echo -e "${color}Installing Maven${nocolor}"
@@ -103,3 +113,15 @@ mysql_shema_setup
   echo -e "${color}Restarting shipping service${nocolor}"
   systemctl restart ${component} &>>${log_file}
 }
+
+python() {
+  echo -e "${color}Install Python 3.6${nocolor}"
+  yum install python36 gcc python3-devel -y &>>${log_file}
+
+app_presetup
+
+  echo -e "${color}Lets download the dependencies${nocolor}"
+  cd /app &>>${log_file}
+  pip3.6 install -r requirements.txt &>>${log_file}
+
+ systemd_setup
