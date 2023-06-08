@@ -42,8 +42,10 @@ app_presetup () {
 
 
 systemd_setup() {
-    cp /home/centos/roboshop-shell/payment.service /etc/systemd/system/payment.service &>>${log_file}
+      echo -e "${color}Setup SystemD Service${nocolor}"
 
+    cp /home/centos/roboshop-shell/${component}.service /etc/systemd/system/payment.service &>>${log_file}
+   sed -i -e "s/roboshop_app_password/${roboshop_app_password}/" /etc/systemd/system/payment.service &>>${log_file}
     echo -e "${color}Setup Starting  Payment Service${nocolor}"
     systemctl daemon-reload &>>${log_file}
     systemctl enable payment &>>${log_file}
