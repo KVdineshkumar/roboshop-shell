@@ -28,6 +28,8 @@ nodeJS() {
 
   cp /home/centos/roboshop-shell/{component}.service /etc/systemd/system/{component}.service  &>>${log_file}
 
+  echo -e "${color}Starting cart service${nocolor}"
+
   systemctl daemon-reload
 
   systemctl enable ${component}
