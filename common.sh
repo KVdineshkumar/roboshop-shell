@@ -36,3 +36,12 @@ nodeJS() {
   systemctl start ${component} &>>${log_file}
 
 }
+
+mongo_shema_setup() {
+  echo -e "$colorinstall mongodb-client$nocolor"
+  cp  /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
+  yum install mongodb-org-shell -y &>>/tmp/roboshop.log
+
+  echo -e "\e[34mLoad Schema\e[0m"
+  mongo --host mongodb-dev.devopsd73.store </app/schema/user.js &>>/tmp/roboshop.log
+}
