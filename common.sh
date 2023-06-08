@@ -43,5 +43,5 @@ mongo_shema_setup() {
   yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
   echo -e "\e[34mLoad Schema\e[0m"
-  mongo --host mongodb-dev.devopsd73.store </app/schema/user.js &>>/tmp/roboshop.log
+  mongo --host mongodb-dev.devopsd73.store </app/schema/${component}.js &>>/tmp/roboshop.log
 }
