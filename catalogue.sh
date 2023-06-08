@@ -14,7 +14,7 @@ echo -e "${color}Creating a directory${nocolor}"
 rm -rf /app
 mkdir /app &>>/tmp/roboshop.log
 
-echo -e "\${color}Download the application code to created app directory${nocolor}"
+echo -e "${color}Download the application code to created app directory${nocolor}"
 curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip  &>>/tmp/roboshop.log
 cd /app
 unzip /tmp/$component.zip &>>/tmp/roboshop.log
