@@ -51,7 +51,7 @@ maven() {
   yum install maven -y &>>${log_file}
 
   echo -e "${color}Adding User${nocolor}"
-  useradd roboshop &>>/tmp${log_file}
+  useradd roboshop &>>${log_file}
 
   echo -e "${color}Removing and Adding directory${nocolor}"
   rm -rf ${app_path}  &>>${log_file}
