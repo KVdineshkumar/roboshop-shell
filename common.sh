@@ -45,3 +45,42 @@ mongo_shema_setup() {
   echo -e "\e[34mLoad Schema\e[0m"
   mongo --host mongodb-dev.devopsd73.store </app/schema/${component}.js &>>/tmp/roboshop.log
 }
+
+maven() {
+  echo -e "${color}Installing Maven${nocolor}"
+  yum install maven -y &>>${log_file}
+
+  echo -e "${color}Adding User${nocolor}"
+  useradd roboshop &>>/tmp${log_file}
+
+  echo -e "${color}Removing and Adding directory${nocolor}"
+  rm -rf ${app_path}  &>>${log_file}
+  mkdir ${app_path}  &>>${log_file}
+
+  echo -e "${color}Download the application code to created app directory${nocolor}"
+  curl -L -o /tmp/${shipping}.zip https://roboshop-artifacts.s3.amazonaws.com/${shipping}.zip &>>/tmp/roboshop.log
+  cd ${app_path}
+  unzip /tmp/${shipping}.zip &>>${log_file}
+
+  echo -e "${color}download the dependencies & build the application${nocolor}"
+  cd ${app_path}
+  mvn clean package &>>/tmp/roboshop.log
+  mv target/${shipping}-1.0.jar ${shipping}.jar &>>${log_file}
+
+  echo -e "${color}Setup SystemD Shipping Service${nocolor}"
+  cp /home/centos/roboshop-shell/${shipping}.service /etc/systemd/system/${shipping}.service &>>${log_file}
+
+  echo -e "${color}Starting Shipping Service${nocolor}"
+  systemctl daemon-reload
+  systemctl enable ${shipping} &>>${log_file}
+  systemctl start ${shipping} &>>${log_file}
+
+  echo -e "${color}Installing mysql server${nocolor}"
+  yum install mysql -y &>>${log_file}
+
+  echo -e "${color}Load Schema${nocolor}"
+  mysql -h mysql-dev.devopsd73.store -uroot -pRoboShop@1 < /app/schema/${shipping}.sql &>>${log_file}
+
+  echo -e "${color}Restarting shipping${nocolor}"
+  systemctl restart ${shipping} &>>${log_file}
+}
