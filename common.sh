@@ -67,34 +67,42 @@ mysql_shema_setup() {
 
   echo -e "${color}Installing mysql server${nocolor}"
   yum install mysql -y &>>${log_file}
+  stat_check $?
 
   echo -e "${color}Load Schema${nocolor}"
   mysql -h mysql-dev.devopsd73.store -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log_file}
+  stat_check $?
 }
 
 nodeJS() {
   echo -e "${color} THis is the script for repo${nocolor}"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_file}
+  stat_check $?
 
-  echo -e "${color}Installing nodejs\e[0m"
+  echo -e "${color}Installing nodejs${nocolor}"
   yum install nodejs -y &>>${log_file}
+  stat_check $?
 
   app_presetup
 
   echo -e "${color}Creating a directory${nocolor}"
   rm -rf ${app_path}
   mkdir ${app_path} &>>${log_file}
+  stat_check $?
 
   echo -e "${color}Download the application code to created app directory${nocolor}"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip  &>>${log_file}
   cd ${app_path}
-  unzip /tmp/${component}.zip &>>${log_file}
+  unzip /tmp/${component}.zip &>>${log_file
+  stat_check $?
 
   echo -e "${color}Installing nodejs dependencies${nocolor}"
   cd /app
   npm install &>>${log_file}
+  stat_check $?
 
   cp /home/centos/roboshop-shell/{component}.service /etc/systemd/system/{component}.service  &>>${log_file}
+  stat_check $?
 
   echo -e "${color}Starting cart service${nocolor}"
 
@@ -102,6 +110,7 @@ nodeJS() {
 
   systemctl enable ${component}
   systemctl start ${component} &>>${log_file}
+  stat_check $?
 
 }
 
