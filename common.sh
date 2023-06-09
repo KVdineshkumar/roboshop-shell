@@ -101,7 +101,8 @@ nodeJS() {
   npm install &>>${log_file}
   stat_check $?
 
-  cp /home/centos/roboshop-shell/{component}.service /etc/systemd/system/{component}.service  &>>${log_file}
+  cp /home/centos/roboshop-shell/{component}.service /etc/systemd/system/${component}.service  &>>${log_file}
+
   stat_check $?
 
   echo -e "${color}Starting cart service${nocolor}"
