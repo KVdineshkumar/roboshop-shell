@@ -1,5 +1,5 @@
 # CentOS-8 Comes with MySQL 8 Version by default, However our application needs MySQL 5.7. So lets disable MySQL 8 version.
-soure common.sh
+source common.sh
 echo -e "\e[33mDisabling mysql 8 version which is coming default\e[0m"
 yum module disable mysql -y &>>/tmp/roboshop.log
 stat_check $?
