@@ -93,7 +93,7 @@ nodeJS() {
   echo -e "${color}Download the application code to created app directory${nocolor}"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip  &>>${log_file}
   cd ${app_path}
-  unzip /tmp/${component}.zip &>>${log_file
+  unzip /tmp/${component}.zip &>>${log_file}
   stat_check $?
 
   echo -e "${color}Installing nodejs dependencies${nocolor}"
