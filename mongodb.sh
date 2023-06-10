@@ -22,3 +22,6 @@ echo -e "\e[35mStart  MongoDB server \e[0m"
 systemctl daemon-reload
 systemctl restart mongod &>>/tmp/roboshop.log
 stat_check $?
+
+
+
